@@ -42,6 +42,8 @@
 #define UART_FINISHED_TRANSMITTING         1
 #define POLLING_TIME                    900
 
+void (*UART_CallBack) (void);
+
 void M_UART_Void_UARTInit(void)
 {
 	u8 Local_U8_UCSRCValue = 0b10000000;
@@ -110,4 +112,14 @@ u8   M_UART_Void_UARTRec(void)
 void M_UART_Void_UARTClear(void)
 {
 	UDR_REG=0;
+}
+void M_UART_Void_SetCallBack(void(*Copy_Ptr)(void))
+{
+	UART_CallBack = Copy_Ptr;
+}
+
+ISR(USART_RXC_vect){
+
+
+	UART_CallBack();
 }

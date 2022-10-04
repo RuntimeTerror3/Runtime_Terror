@@ -27,6 +27,8 @@ RM := rm -rf
 -include HAL/DCMotor/subdir.mk
 -include HAL/Buzzer/subdir.mk
 -include HAL/AT24C16A/subdir.mk
+-include APP/Mahmoud/subdir.mk
+-include APP/Ahmed/subdir.mk
 -include APP/subdir.mk
 -include subdir.mk
 -include objects.mk
@@ -51,11 +53,14 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
 509_GROUP.lss \
+509_GROUP.lss \
 
 FLASH_IMAGE += \
 509_GROUP.hex \
+509_GROUP.hex \
 
 SIZEDUMMY += \
+sizedummy \
 sizedummy \
 
 

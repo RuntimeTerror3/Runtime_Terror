@@ -20,6 +20,8 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+APP/Ahmed \
+APP/Mahmoud \
 APP \
 HAL/AT24C16A \
 HAL/Buzzer \

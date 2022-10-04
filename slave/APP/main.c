@@ -19,12 +19,15 @@
 #include "SPI_Interface.h"
 #include "UART_Interface.h"
 #include "LED_Interface.h"
+#include "Ahmed.h"
 
+#include "Mahmoud.h"
 void A_EXT_INT0_Execution(void);
 void A_Timer0_Execution(void);
 u8 A_LCD_Execution(void);
 
 u32 Global_A_U32_Timer_s;
+
 
 int main()
 {
@@ -95,6 +98,8 @@ int main()
 		break;
 	}
 	return 0;
+	A_Mah_Function();
+	M_UART_Void_SetCallBack(H_HC05_Void_CheckAdmin_Or_User);
 }
 
 void A_EXT_INT0_Execution(void)
