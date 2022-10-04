@@ -2,7 +2,7 @@
  * main.c
  *
  *  Created on: kjksjdkds
- *      Author: lol
+ *      Author: shit
  */
 
 
