@@ -73,3 +73,9 @@ u8   M_I2C_Void_I2CReadByte(void)
 	Local_U8_Data = TWDR_REG;
 	return Local_U8_Data;
 }
+
+void M_I2C_Void_I2CReInit(void)
+{
+	TWCR_REG=0x00;
+	SET_BIT(TWCR_REG,TWEN_BIT);
+}

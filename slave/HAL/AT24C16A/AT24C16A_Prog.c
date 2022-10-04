@@ -36,11 +36,22 @@ u8   H_AT24C16A_Void_EEPROMRead(u8 Copy_U8_Page,u8 Copy_U8_Byte)
 
 u8   H_AT24C16A_U8_EEPROMUserCheck(u8*Local_U8_ArrPtr)
 {
-	u8 x=*Local_U8_ArrPtr;
-	if (x==48){
-		H_LED_Void_LedInit(LED1);
+	u8 Local_U8_Arr[4];
+	Local_U8_Arr[0]=*Local_U8_ArrPtr;
+	if(Local_U8_Arr[0]==H_AT24C16A_Void_EEPROMRead(0,0))
 		H_LED_Void_LedTog(LED1);
-	}
+	Local_U8_Arr[1]=*(Local_U8_ArrPtr+1);
+	M_I2C_Void_I2CReInit();
+	if(Local_U8_Arr[1]==H_AT24C16A_Void_EEPROMRead(1,0))
+		H_LED_Void_LedTog(LED2);
+	Local_U8_Arr[2]=*(Local_U8_ArrPtr+2);
+	M_I2C_Void_I2CReInit();
+	if(Local_U8_Arr[2]==H_AT24C16A_Void_EEPROMRead(2,0))
+		H_LED_Void_LedTog(LED1);
+	Local_U8_Arr[3]=*(Local_U8_ArrPtr+3);
+	M_I2C_Void_I2CReInit();
+	if(Local_U8_Arr[3]==H_AT24C16A_Void_EEPROMRead(3,0))
+		H_LED_Void_LedTog(LED2);
 }
 
 

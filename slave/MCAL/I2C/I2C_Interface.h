@@ -19,5 +19,6 @@ void M_I2C_Void_I2CSendSlaveAddressWrite(u8);
 void M_I2C_Void_I2CSendSlaveAddressRead(u8);
 void M_I2C_Void_I2CSendByte(u8);
 u8   M_I2C_Void_I2CReadByte(void);
+void M_I2C_Void_I2CReInit(void);
 
 #endif /* MCAL_I2C_I2C_INTERFACE_H_ */
