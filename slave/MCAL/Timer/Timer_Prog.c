@@ -17,8 +17,6 @@ void (*Timer0_CallBack) (void);
 void (*Timer1_CallBack) (void);
 void (*Timer2_CallBack) (void);
 
-
-
 void M_Timer_Void_TimerInit(u8 Copy_U8_TimerChannel)
 {
 	switch(Copy_U8_TimerChannel)

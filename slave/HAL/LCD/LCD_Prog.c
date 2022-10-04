@@ -9,6 +9,8 @@
 #include "LCD_Interface.h"
 #include "LCD_Private.h"
 
+u8 (*LCD_CallBack) (void);
+extern u32 Global_A_U32_Timer_s;
 
 void H_LCD_Void_LCDInit(void)
 {
@@ -122,29 +124,11 @@ void H_LCD_Void_LCDWriteNumber(s32 Copy_S32_Num)
 
 }
 
-
-
-
-
 void H_LCD_Void_LCDGoTo(u8 Copy_U8_Row,u8 Copy_U8_Col)
 {
 	u8 Local_U8Arr [2] = {0x80 , 0xC0};
 	H_LCD_Void_LCDWriteCommand(Local_U8Arr[Copy_U8_Row] + Copy_U8_Col);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 void H_LCD_Void_LCDClear(void)
 {
@@ -168,4 +152,61 @@ static void H_LCD_Void_SetLCDPins(u8 Copy_U8_Pins)
 	M_DIO_Void_SetPinValue(LCD_D6_PIN,Copy_U8_Pins >> 2 & 0x01);
 	M_DIO_Void_SetPinValue(LCD_D7_PIN,Copy_U8_Pins >> 3 & 0x01);
 #endif
+}
+
+u8 H_LCD_Void_LCDWelcome(void)
+{
+	u32 Local_U32_Counter=0;
+	u8 Local_U8_Read=0;
+	while(1)
+	{
+		H_LCD_Void_LCDClear();
+		H_LCD_Void_LCDWriteString("--)Smart Home(--");
+		H_LCD_Void_LCDGoTo(1,0);
+		H_LCD_Void_LCDWriteString("AvailableDevices");
+		Local_U32_Counter=Global_A_U32_Timer_s+5;
+		while(Global_A_U32_Timer_s <=Local_U32_Counter)
+		{
+			Local_U8_Read=LCD_CallBack();
+			if(Local_U8_Read!=0)
+				break;
+		}
+		if(Local_U8_Read!=0)
+			break;
+		H_LCD_Void_LCDClear();
+		H_LCD_Void_LCDGoTo(0,0);
+		H_LCD_Void_LCDWriteString("1- Lamps 0:4");
+		H_LCD_Void_LCDGoTo(1,0);
+		H_LCD_Void_LCDWriteString("2- Door");
+		H_LCD_Void_LCDGoTo(1,10);
+		H_LCD_Void_LCDWriteString("3- AC");
+		Local_U32_Counter=Global_A_U32_Timer_s+5;
+		while(Global_A_U32_Timer_s <=Local_U32_Counter)
+		{
+			Local_U8_Read=LCD_CallBack();
+			if(Local_U8_Read!=0)
+				break;
+		}
+		if(Local_U8_Read!=0)
+			break;
+		H_LCD_Void_LCDGoTo(0,0);
+		H_LCD_Void_LCDWriteString("To login, Please");
+		H_LCD_Void_LCDGoTo(1,0);
+		H_LCD_Void_LCDWriteString("enter ur username");
+		Local_U32_Counter=Global_A_U32_Timer_s+5;
+		while(Global_A_U32_Timer_s <=Local_U32_Counter)
+		{
+			Local_U8_Read=LCD_CallBack();
+			if(Local_U8_Read!=0)
+				break;
+		}
+		if(Local_U8_Read!=0)
+			break;
+	}
+	return Local_U8_Read;
+}
+
+void H_LCD_Void_SetCallBack(u8(*Copy_Ptr)(void))
+{
+	LCD_CallBack=Copy_Ptr;
 }

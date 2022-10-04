@@ -18,7 +18,7 @@
 /*
  * TIMER0_MODE OPTIONS : [ NORMAL_MODE , CTC_MODE ]
  */
-#define TIMER0_MODE          CTC_MODE
+#define TIMER0_MODE          NORMAL_MODE
 /*
  * PWM0_MODE OPTIONS : [ FAST_PWM , PHASE_CORRECT ]
  */

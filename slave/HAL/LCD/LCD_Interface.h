@@ -20,5 +20,7 @@ void H_LCD_Void_LCDWriteString(u8*);
 void H_LCD_Void_LCDWriteNumber(s32);
 void H_LCD_Void_LCDGoTo(u8,u8);
 void H_LCD_Void_LCDClear(void);
+u8 H_LCD_Void_LCDWelcome(void);
+void H_LCD_Void_SetCallBack(u8(*)(void));
 
 #endif /* HAL_LCD_LCD_INTERFACE_H_ */

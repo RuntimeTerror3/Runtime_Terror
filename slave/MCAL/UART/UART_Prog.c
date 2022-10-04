@@ -106,3 +106,8 @@ u8   M_UART_Void_UARTRec(void)
 	}
 	return UDR_REG;
 }
+
+void M_UART_Void_UARTClear(void)
+{
+	UDR_REG=0;
+}

@@ -1,10 +1,9 @@
 /*
  * main.c
  *
- *  Created on: kjksjdkds
- *      Author: shit
+ *  Created on: ???/???/????
+ *      Author: dell
  */
-
 
 #include "EXT_INT_Interface.h"
 #include "KeyPad_Interface.h"
@@ -18,38 +17,44 @@
 #include "WDT_Interface.h"
 #include "AT24C16A_Interface.h"
 #include "SPI_Interface.h"
+#include "UART_Interface.h"
+#include "LED_Interface.h"
 
 void A_EXT_INT0_Execution(void);
 void A_Timer0_Execution(void);
+u8 A_LCD_Execution(void);
 
+u32 Global_A_U32_Timer_s;
 
 int main()
 {
-	u8 x = 0;
-	H_AT24C16A_Void_EEPROMInit();
+	M_GIE_Void_GlobalInterruptEnable();
+	M_Timer_Void_TimerInit(TIMER0_CHANNEL);
+	H_KeyPad_Void_KeyPadInit();
+	M_UART_Void_UARTInit();
 	H_LCD_Void_LCDInit();
-	x = H_AT24C16A_Void_EEPROMRead(5,12);
-	while(1)
-	{
-		H_LCD_Void_LCDWriteNumber(x);
-		_delay_ms(1000);
-		x++;
-		H_LCD_Void_LCDClear();
-		H_AT24C16A_Void_EEPROMWrite(5,12,x);
-	}
+	H_LED_Void_LedInit(LED1);
+	H_LCD_Void_SetCallBack(A_LCD_Execution);
+	M_Timer_Void_TimerSetTime(TIMER0_CHANNEL,1000);
+	M_Timer_Void_SetCallBack(TIMER0_CHANNEL,A_Timer0_Execution);
+	M_Timer_Void_TimerStart(TIMER0_CHANNEL);
+
+	u8 x=H_LCD_Void_LCDWelcome();
+
+	H_LCD_Void_LCDClear();
+	H_LCD_Void_LCDWriteString("Shit");
+	_delay_ms(1000);
 	return 0;
 }
 
 void A_EXT_INT0_Execution(void)
 {
-	H_Buzzer_Void_BuzzerOnce();
 	H_LED_Void_LedSetOn(LED0);
 	H_LCD_Void_LCDWriteCharacter('A');
 }
 void A_Timer0_Execution(void)
 {
-	//H_Buzzer_Void_BuzzerOnce();
-	H_LED_Void_LedTog(LED0);
+	Global_A_U32_Timer_s++;
 }
 void A_Timer1_Execution(void)
 {
@@ -57,3 +62,10 @@ void A_Timer1_Execution(void)
 	H_LED_Void_LedTog(LED0);
 }
 
+u8 A_LCD_Execution(void)
+{
+	H_LED_Void_LedTog(LED1);
+	u8 Local_U8_Read=0;
+	Local_U8_Read = H_KeyPad_U8_KeyPadRead();
+	return Local_U8_Read;
+}

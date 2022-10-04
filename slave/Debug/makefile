@@ -27,7 +27,6 @@ RM := rm -rf
 -include HAL/DCMotor/subdir.mk
 -include HAL/Buzzer/subdir.mk
 -include HAL/AT24C16A/subdir.mk
--include APP/Projects/subdir.mk
 -include APP/subdir.mk
 -include subdir.mk
 -include objects.mk
@@ -85,7 +84,7 @@ all: 509_GROUP.elf secondary-outputs
 
 sizedummy: 509_GROUP.elf
 	@echo 'Invoking: Print Size'
-	-avr-size --format=berkeley -t 509_GROUP.elf
+	-avr-size --format=avr --mcu=atmega32 509_GROUP.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 

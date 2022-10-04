@@ -20,7 +20,6 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-APP/Projects \
 APP \
 HAL/AT24C16A \
 HAL/Buzzer \
