@@ -5,12 +5,7 @@
  *      Author: dell
  */
 
-
-
 #include "KeyPad_Interface.h"
-
-
-
 
 void H_KeyPad_Void_KeyPadInit(void)
 {

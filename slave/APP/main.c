@@ -31,6 +31,9 @@ u32 Global_A_U32_Timer_s;
 
 int main()
 {
+	H_LED_Void_LedInit(LED1);
+	H_LED_Void_LedInit(LED2);
+	H_AT24C16A_Void_EEPROMInit();
 	M_GIE_Void_GlobalInterruptEnable();
 	M_Timer_Void_TimerInit(TIMER0_CHANNEL);
 	H_KeyPad_Void_KeyPadInit();
@@ -53,11 +56,13 @@ int main()
 	}
 	else if(Local_U8_Options>=65 && Local_U8_Options<=68)
 	{
-		H_LCD_Void_LCDWriteString("Shittt");
+		Local_U8_ArrUserPtr=H_KeyPad_U8_KeyPadGetUser(Local_U8_Options);
+		H_AT24C16A_U8_EEPROMUserCheck(Local_U8_ArrUserPtr);
 	}
 	else if(Local_U8_Options==42 || Local_U8_Options==35)
 	{
-		H_LCD_Void_LCDWriteString("Shitttt");
+		Local_U8_ArrUserPtr=H_KeyPad_U8_KeyPadGetUser(Local_U8_Options);
+		H_AT24C16A_U8_EEPROMUserCheck(Local_U8_ArrUserPtr);
 	}
 	switch(Local_U8_Options)
 	{
