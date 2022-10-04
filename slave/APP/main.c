@@ -43,6 +43,8 @@ int main()
 
 	H_LCD_Void_LCDClear();
 	H_LCD_Void_LCDWriteString("Shit");
+	M_UART_Void_UARTSend(65);
+	M_UART_Void_UARTSend(66);
 	_delay_ms(1000);
 	return 0;
 }
@@ -66,6 +68,9 @@ u8 A_LCD_Execution(void)
 {
 	H_LED_Void_LedTog(LED1);
 	u8 Local_U8_Read=0;
-	Local_U8_Read = H_KeyPad_U8_KeyPadRead();
+	if(H_KeyPad_U8_KeyPadRead()!=0)
+		Local_U8_Read = H_KeyPad_U8_KeyPadRead();
+	else if(M_UART_Void_UARTRec()!=0)
+		Local_U8_Read = M_UART_Void_UARTRec();
 	return Local_U8_Read;
 }

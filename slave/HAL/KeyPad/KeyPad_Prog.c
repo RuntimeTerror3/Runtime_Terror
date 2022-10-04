@@ -53,7 +53,6 @@ u8   H_KeyPad_U8_KeyPadRead(void)
 				_delay_ms(KEYPAD_DEBOUNCING_TIME);
 				if(M_DIO_U8_GetPinValue(Local_U8_Col) == KEYPAD_PRESSED)
 				{
-					while(M_DIO_U8_GetPinValue(Local_U8_Col) == KEYPAD_PRESSED);
 					Local_U8_Reading = Local_U8_Arr[Local_U8_Row-KEYPAD_R0_PIN][Local_U8_Col-KEYPAD_C0_PIN];
 					break;
 				}
