@@ -40,7 +40,7 @@
 
 #define UART_FINISHED_RECEIVING            1
 #define UART_FINISHED_TRANSMITTING         1
-#define POLLING_TIME                    2
+#define POLLING_TIME                    900
 
 void M_UART_Void_UARTInit(void)
 {

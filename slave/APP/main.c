@@ -39,13 +39,41 @@ int main()
 	M_Timer_Void_SetCallBack(TIMER0_CHANNEL,A_Timer0_Execution);
 	M_Timer_Void_TimerStart(TIMER0_CHANNEL);
 
-	u8 x=H_LCD_Void_LCDWelcome();
-
+	u8 Local_U8_Options=0;
+	Local_U8_Options = H_LCD_Void_LCDWelcome();
 	H_LCD_Void_LCDClear();
-	H_LCD_Void_LCDWriteString("Shit");
-	M_UART_Void_UARTSend(65);
-	M_UART_Void_UARTSend(66);
-	_delay_ms(1000);
+	if(Local_U8_Options>=48 && Local_U8_Options<=57)
+	{
+		H_LCD_Void_LCDWriteString("Shitt");
+	}
+	else if(Local_U8_Options>=65 && Local_U8_Options<=68)
+	{
+		H_LCD_Void_LCDWriteString("Shittt");
+	}
+	else if(Local_U8_Options==42 || Local_U8_Options==35)
+	{
+		H_LCD_Void_LCDWriteString("Shitttt");
+	}
+	switch(Local_U8_Options)
+	{
+	case 33:
+		H_LCD_Void_LCDWriteString("Shit");
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	case 5:
+		break;
+	case 6:
+		break;
+	case 7:
+		break;
+	case 8:
+		break;
+	}
 	return 0;
 }
 
@@ -66,11 +94,10 @@ void A_Timer1_Execution(void)
 
 u8 A_LCD_Execution(void)
 {
-	H_LED_Void_LedTog(LED1);
 	u8 Local_U8_Read=0;
 	if(H_KeyPad_U8_KeyPadRead()!=0)
 		Local_U8_Read = H_KeyPad_U8_KeyPadRead();
-	else if(M_UART_Void_UARTRec()!=0)
+	else if(M_UART_Void_UARTRec()!=48)
 		Local_U8_Read = M_UART_Void_UARTRec();
 	return Local_U8_Read;
 }
