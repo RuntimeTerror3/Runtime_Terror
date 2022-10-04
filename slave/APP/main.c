@@ -40,11 +40,13 @@ int main()
 	M_Timer_Void_TimerStart(TIMER0_CHANNEL);
 
 	u8 Local_U8_Options=0;
+	u8 *Local_U8_ArrUserPtr;
 	Local_U8_Options = H_LCD_Void_LCDWelcome();
 	H_LCD_Void_LCDClear();
 	if(Local_U8_Options>=48 && Local_U8_Options<=57)
 	{
-		H_LCD_Void_LCDWriteString("Shitt");
+		Local_U8_ArrUserPtr=H_KeyPad_U8_KeyPadGetUser(Local_U8_Options);
+		H_AT24C16A_U8_EEPROMUserCheck(Local_U8_ArrUserPtr);
 	}
 	else if(Local_U8_Options>=65 && Local_U8_Options<=68)
 	{
@@ -59,19 +61,37 @@ int main()
 	case 33:
 		H_LCD_Void_LCDWriteString("Shit");
 		break;
-	case 2:
+	case 34:
 		break;
-	case 3:
+	case 36:
 		break;
-	case 4:
+	case 37:
 		break;
-	case 5:
+	case 38:
 		break;
-	case 6:
+	case 39:
 		break;
-	case 7:
+	case 40:
 		break;
-	case 8:
+	case 41:
+		break;
+	case 43:
+		break;
+	case 44:
+		break;
+	case 45:
+		break;
+	case 46:
+		break;
+	case 47:
+		break;
+	case 58:
+		break;
+	case 59:
+		break;
+	case 60:
+		break;
+	case 61:
 		break;
 	}
 	return 0;

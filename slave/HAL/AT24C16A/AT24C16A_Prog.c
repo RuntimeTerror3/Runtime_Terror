@@ -6,6 +6,7 @@
  */
 
 #include "AT24C16A_Interface.h"
+#include "LED_Interface.h"
 
 void H_AT24C16A_Void_EEPROMInit(void)
 {
@@ -33,7 +34,14 @@ u8   H_AT24C16A_Void_EEPROMRead(u8 Copy_U8_Page,u8 Copy_U8_Byte)
 	return Local_U8_Reading;
 }
 
-
+u8   H_AT24C16A_U8_EEPROMUserCheck(u8*Local_U8_ArrPtr)
+{
+	u8 x=*Local_U8_ArrPtr;
+	if (x==48){
+		H_LED_Void_LedInit(LED1);
+		H_LED_Void_LedTog(LED1);
+	}
+}
 
 
 

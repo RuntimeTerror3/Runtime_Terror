@@ -63,6 +63,33 @@ u8   H_KeyPad_U8_KeyPadRead(void)
 	return Local_U8_Reading;
 }
 
+u8 *H_KeyPad_U8_KeyPadGetUser(u8 Local_U8_FirstElement)
+{
+	static u8 Local_U8_ArrUser[4];
+	Local_U8_ArrUser[0]=Local_U8_FirstElement;
+	_delay_ms(1000);
+	while(1)
+	{
+		Local_U8_ArrUser[1]=H_KeyPad_U8_KeyPadRead();
+		if(Local_U8_ArrUser[1]!=0)
+			break;
+	}
+	_delay_ms(1000);
+	while(1)
+	{
+		Local_U8_ArrUser[2]=H_KeyPad_U8_KeyPadRead();
+		if(Local_U8_ArrUser[2]!=0)
+			break;
+	}
+	_delay_ms(1000);
+	while(1)
+	{
+		Local_U8_ArrUser[3]=H_KeyPad_U8_KeyPadRead();
+		if(Local_U8_ArrUser[3]!=0)
+			break;
+	}
+	return Local_U8_ArrUser;
+}
 
 
 
