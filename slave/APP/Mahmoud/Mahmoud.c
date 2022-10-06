@@ -78,25 +78,26 @@ void A_Mah_Function(){
 
 }
 
-void A_Timer0_Execution_1(void)
-{
+//void A_Timer0_Execution_1(void)
+//{
+//
+//
+//	u16 Local_Temperature=0;
+//
+//	Local_Temperature= H_LM35_Void_LM35Read();
+//
+//	if(HIGH_TEMPERATURE<=Local_Temperature)
+//		{
+//
+//			H_DCMotor_Void_DCMotorStart();
+//		}
+//	else if (LOW_TEMPERAUTRE >=Local_Temperature)
+//		{
+//			H_DCMotor_Void_DCMotorStop();
+//		}
+//
 
-	u16  static  Global_Temperature=0;
-
-
-	Global_Temperature= H_LM35_Void_LM35Read();
-	if(HIGH_TEMPERATURE<=Global_Temperature)
-		{
-
-			H_DCMotor_Void_DCMotorStart();
-		}
-	else if (LOW_TEMPERAUTRE >=Global_Temperature)
-		{
-			H_DCMotor_Void_DCMotorStop();
-		}
-
-
-}
+//}
 #if BUZZER_MODE_ON==BUZZER_MODE
 void A_Timer0_Execution_2(void)
 {

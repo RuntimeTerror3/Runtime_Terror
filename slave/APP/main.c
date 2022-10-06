@@ -28,7 +28,7 @@ u8 A_LCD_Execution(void);
 void A_Timer0_Execution_1(void);
 
 u32 Global_A_U32_Timer_s;
-
+ u16 Global_Temperature;
 
 int main()
 {	H_LCD_Void_LCDInit();
@@ -133,7 +133,6 @@ return 0;
 void A_Timer0_Execution_1(void)
 {
 
-	u16  static  Global_Temperature=0;
 
 
 	Global_Temperature= H_LM35_Void_LM35Read();
