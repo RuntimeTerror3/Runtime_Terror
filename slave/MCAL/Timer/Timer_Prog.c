@@ -9,11 +9,14 @@
 #include "Timer_Interface.h"
 #include "Timer_Private.h"
 
+
+
 u32 Timer_U32_NumOfOverFlows    = 0;
 u8  Timer_U8_RemTicks           = 0;
 u32 Timer_U32_NumOfCompareMatch = 0;
 
 void (*Timer0_CallBack) (void);
+void (*Timer0_CallBack_2) (void);
 void (*Timer1_CallBack) (void);
 void (*Timer2_CallBack) (void);
 
@@ -225,6 +228,9 @@ void M_Timer_Void_SetCallBack(u8 Copy_U8_TimerChannel,void(*Copy_Ptr)(void))
 	case TIMER0_CHANNEL:
 		Timer0_CallBack = Copy_Ptr;
 		break;
+	case TIMER0_CHANNEL_2:
+		Timer0_CallBack_2=Copy_Ptr;
+		break;
 	case TIMER1_CHANNEL:
 		Timer1_CallBack = Copy_Ptr;
 		break;
@@ -241,6 +247,8 @@ ISR(TIMER0_OVF_vect)
 	if(Local_U32_Counter == Timer_U32_NumOfOverFlows)
 	{
 		Timer0_CallBack();
+		Timer0_CallBack_2();
+
 		TCNT0_REG = 256 - Timer_U8_RemTicks;
 		Local_U32_Counter = 0;
 	}

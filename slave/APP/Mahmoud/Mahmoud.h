@@ -30,4 +30,13 @@
 
 void try_E2PROM(void);
 void A_Mah_Function(void);
+void A_Timer0_Execution_2(void);
+
+
+
+#define HIGH_TEMPERATURE 28
+#define LOW_TEMPERAUTRE 21
+#define BUZZER_ON 		 1
+#define BUZZER_OFF 		 0
+
 #endif /* APP_MAHMOUD_MAHMOUD_H_ */

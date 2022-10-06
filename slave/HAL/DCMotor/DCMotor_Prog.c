@@ -40,4 +40,5 @@ void H_DCMotor_Void_DCMotorStart(void)
 void H_DCMotor_Void_DCMotorStop(void)
 {
 	M_Timer_Void_PWMStop(TIMER1_CHANNEL);
+
 }

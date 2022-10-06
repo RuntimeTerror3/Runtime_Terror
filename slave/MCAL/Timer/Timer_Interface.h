@@ -15,6 +15,7 @@
 #include <avr/interrupt.h>
 
 #define TIMER0_CHANNEL          0
+#define TIMER0_CHANNEL_2          3
 #define TIMER1_CHANNEL          1
 #define TIMER2_CHANNEL          2
 
