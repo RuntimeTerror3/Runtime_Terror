@@ -7,7 +7,6 @@
 
 #include "AT24C16A_Interface.h"
 #include "LED_Interface.h"
-#include "Buzzer_Interface.h"
 
 void H_AT24C16A_Void_EEPROMInit(void)
 {
@@ -35,22 +34,29 @@ u8   H_AT24C16A_Void_EEPROMRead(u8 Copy_U8_Page,u8 Copy_U8_Byte)
 	return Local_U8_Reading;
 }
 
-u8   H_AT24C16A_U8_EEPROMUserCheck(u8*Local_U8_ArrPtr)
+void  H_AT24C16A_U8_EEPROMUserCheck(u8*Local_U8_ArrPtr)
 {
 	u8 Local_U8_Arr[4];
 	Local_U8_Arr[0]=*Local_U8_ArrPtr;
+	if(Local_U8_Arr[0]==H_AT24C16A_Void_EEPROMRead(0,0))
+		H_LED_Void_LedTog(LED1);
+<<<<<<< HEAD
+	}
+
+=======
 	Local_U8_Arr[1]=*(Local_U8_ArrPtr+1);
 	M_I2C_Void_I2CReInit();
-	if(105==H_AT24C16A_Void_EEPROMRead(0,1))
-		H_LED_Void_LedTog(LED0);
+	if(Local_U8_Arr[1]==H_AT24C16A_Void_EEPROMRead(1,0))
+		H_LED_Void_LedTog(LED2);
 	Local_U8_Arr[2]=*(Local_U8_ArrPtr+2);
 	M_I2C_Void_I2CReInit();
-	if(Local_U8_Arr[2]==H_AT24C16A_Void_EEPROMRead(0,2))
-		H_LED_Void_LedTog(LED0);
+	if(Local_U8_Arr[2]==H_AT24C16A_Void_EEPROMRead(2,0))
+		H_LED_Void_LedTog(LED1);
 	Local_U8_Arr[3]=*(Local_U8_ArrPtr+3);
 	M_I2C_Void_I2CReInit();
-	if(Local_U8_Arr[3]==H_AT24C16A_Void_EEPROMRead(0,3))
-		H_LED_Void_LedTog(LED0);
+	if(Local_U8_Arr[3]==H_AT24C16A_Void_EEPROMRead(3,0))
+		H_LED_Void_LedTog(LED2);
+>>>>>>> 47c26b62bc66abf382ac7eae5cec873371db8995
 }
 
 

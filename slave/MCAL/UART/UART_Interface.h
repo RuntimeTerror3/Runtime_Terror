@@ -13,14 +13,12 @@
 #include "BitMath.h"
 #include "STD.h"
 
-#define UDR_REG                 *(volatile u8*)0x2C
-
 void M_UART_Void_UARTInit(void);
 void M_UART_Void_UARTSetBaudRate(u32);
 void M_UART_Void_UARTSend(u8);
 u8   M_UART_Void_UARTRec(void);
 void M_UART_Void_UARTClear(void);
-void M_UART_Void_UARTSendString(u8,u8*);
-void M_UART_Void_UARTSetCallBack(void(*)(void));
+void M_UART_Void_SetCallBack(void(*Copy_Ptr)(void));
+
 
 #endif /* MCAL_UART_UART_INTERFACE_H_ */
