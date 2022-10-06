@@ -51,9 +51,9 @@ M_Timer_Void_TimerStart(TIMER0_CHANNEL);
 /*
  * Set motor speed
  */
-H_DCMotor_Void_DCMotorInit();
-H_DCMotor_Void_DCMotorSetDirection(CW);
-H_DCMotor_Void_DCMotorSetSpeed(60);
+H_DCMotor_Void_DCMotorInit(WITHOUT_PWM);
+//H_DCMotor_Void_DCMotorSetDirection(CW);
+//H_DCMotor_Void_DCMotorSetSpeed(60);
 /************************************************/
 //while(1)
 //{
@@ -139,11 +139,11 @@ void A_Timer0_Execution_1(void)
 	if(HIGH_TEMPERATURE<=Global_Temperature)
 		{
 
-			H_DCMotor_Void_DCMotorStart();
+			H_DCMotor_Void_DCMotorStart(WITHOUT_PWM);
 		}
 	else if (LOW_TEMPERAUTRE >=Global_Temperature)
 		{
-			H_DCMotor_Void_DCMotorStop();
+			H_DCMotor_Void_DCMotorStop(WITHOUT_PWM);
 		}
 
 

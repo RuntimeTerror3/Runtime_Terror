@@ -8,11 +8,19 @@
 
 #include "DCMotor_Interface.h"
 
-void H_DCMotor_Void_DCMotorInit(void)
-{
-	M_DIO_Void_SetPinDirection(DC_MOTOR_PIN1,OUTPUT);
-	M_DIO_Void_SetPinDirection(DC_MOTOR_PIN2,OUTPUT);
+void H_DCMotor_Void_DCMotorInit(u8 Copy_InIt)
+{		M_DIO_Void_SetPinDirection(DC_MOTOR_PIN1,OUTPUT);
+		M_DIO_Void_SetPinDirection(DC_MOTOR_PIN2,OUTPUT);
+	switch(Copy_InIt)
+	{
+	case WITH_PWM:
+
 	M_Timer_Void_PWMInit(TIMER1_CHANNEL);
+	break;
+	case WITHOUT_PWM:
+
+			break;
+	}
 }
 void H_DCMotor_Void_DCMotorSetSpeed(u32 Copy_U32_MotorSpeed)
 {
@@ -32,13 +40,34 @@ case CW:
 	break;
 }
 }
-void H_DCMotor_Void_DCMotorStart(void)
+void H_DCMotor_Void_DCMotorStart(u8 Copy_Option)
 {
-	M_Timer_Void_PWMStart(TIMER1_CHANNEL);
+	switch (Copy_Option) {
+		case WITH_PWM:
+			M_Timer_Void_PWMStart(TIMER1_CHANNEL);
+
+			break;
+		case WITHOUT_PWM :
+			M_DIO_Void_SetPinValue(DC_MOTOR_PIN1,HIGH);
+			M_DIO_Void_SetPinValue(DC_MOTOR_PIN2,LOW);
+			break;
+		default:
+			break;
+	}
 
 }
-void H_DCMotor_Void_DCMotorStop(void)
-{
-	M_Timer_Void_PWMStop(TIMER1_CHANNEL);
+void H_DCMotor_Void_DCMotorStop(u8 Copy_Option)
+{	switch (Copy_Option) {
+	case WITH_PWM:
+		M_Timer_Void_PWMStop(TIMER1_CHANNEL);
+
+		break;
+	case WITHOUT_PWM :
+		M_DIO_Void_SetPinValue(DC_MOTOR_PIN1,LOW);
+		M_DIO_Void_SetPinValue(DC_MOTOR_PIN2,LOW);
+		break;
+	default:
+		break;
+}
 
 }
