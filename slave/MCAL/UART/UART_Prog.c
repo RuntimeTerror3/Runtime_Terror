@@ -7,9 +7,15 @@
 
 #include "UART_Interface.h"
 #include "UART_Private.h"
+#include <util/delay.h>
+#include "Buzzer_Interface.h"
+#include <avr/interrupt.h>
 
 
-#define UDR_REG                 *(volatile u8*)0x2C
+void (*UART_CallBack) (void);
+
+
+
 #define UCSRA_REG               *(volatile u8*)0x2B
 #define UCSRB_REG               *(volatile u8*)0x2A
 #define UCSRC_REG               *(volatile u8*)0x40
@@ -78,6 +84,8 @@ void M_UART_Void_UARTInit(void)
 	SET_BIT(UCSRB_REG,RXEN_BIT);
 	/* TO ENABLE TX CIRCUIT */
 	SET_BIT(UCSRB_REG,TXEN_BIT);
+
+	SET_BIT(UCSRB_REG,7);
 }
 
 void M_UART_Void_UARTSend(u8 Copy_U8_Data)
@@ -110,4 +118,25 @@ u8   M_UART_Void_UARTRec(void)
 void M_UART_Void_UARTClear(void)
 {
 	UDR_REG=0;
+}
+
+void M_UART_Void_UARTSendString(u8 Copy_U8_CharNum,u8* Copy_U8_String)
+{
+	u8 Local_U8_Counter = 0;
+	while(Local_U8_Counter<=Copy_U8_CharNum-1)
+	{
+		M_UART_Void_UARTSend((u16)Copy_U8_String[Local_U8_Counter]);
+		Local_U8_Counter++;
+		_delay_ms(1);
+	}
+}
+
+void M_UART_Void_UARTSetCallBack(void(*Copy_Ptr)(void))
+{
+	UART_CallBack=Copy_Ptr;
+}
+
+ISR(USART_RXC_vect)
+{
+	UART_CallBack();
 }

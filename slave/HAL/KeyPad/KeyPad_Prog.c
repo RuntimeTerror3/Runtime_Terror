@@ -7,6 +7,8 @@
 
 #include "KeyPad_Interface.h"
 
+u8 (*KeyPad_CallBack) (u8*);
+
 void H_KeyPad_Void_KeyPadInit(void)
 {
 	M_DIO_Void_SetPinDirection(KEYPAD_R0_PIN,OUTPUT);
@@ -32,9 +34,9 @@ void H_KeyPad_Void_KeyPadInit(void)
 u8   H_KeyPad_U8_KeyPadRead(void)
 {
 	u8 Local_U8_Arr [4][4] = { { '1' , '2' , '3' , 'A' },
-			                   { '4' , '5' , '6' , 'B' },
-		                       { '7' , '8' , '9' , 'C' },
-			                   { '*' , '0' , '#' , 'D' }};
+			{ '4' , '5' , '6' , 'B' },
+			{ '7' , '8' , '9' , 'C' },
+			{ '*' , '0' , '#' , 'D' }};
 	u8 Local_U8_Reading = 0;
 	u8 Local_U8_Row = 0;
 	u8 Local_U8_Col = 0;
@@ -60,8 +62,10 @@ u8   H_KeyPad_U8_KeyPadRead(void)
 
 u8 *H_KeyPad_U8_KeyPadGetUser(u8 Local_U8_FirstElement)
 {
-	static u8 Local_U8_ArrUser[4];
+	static u8 Local_U8_ArrUser[6];
 	Local_U8_ArrUser[0]=Local_U8_FirstElement;
+	KeyPad_CallBack("UserName: ");
+	KeyPad_CallBack(Local_U8_ArrUser[0]);
 	_delay_ms(1000);
 	while(1)
 	{
@@ -69,6 +73,7 @@ u8 *H_KeyPad_U8_KeyPadGetUser(u8 Local_U8_FirstElement)
 		if(Local_U8_ArrUser[1]!=0)
 			break;
 	}
+	KeyPad_CallBack(Local_U8_ArrUser[1]);
 	_delay_ms(1000);
 	while(1)
 	{
@@ -76,6 +81,7 @@ u8 *H_KeyPad_U8_KeyPadGetUser(u8 Local_U8_FirstElement)
 		if(Local_U8_ArrUser[2]!=0)
 			break;
 	}
+	KeyPad_CallBack(Local_U8_ArrUser[2]);
 	_delay_ms(1000);
 	while(1)
 	{
@@ -83,15 +89,26 @@ u8 *H_KeyPad_U8_KeyPadGetUser(u8 Local_U8_FirstElement)
 		if(Local_U8_ArrUser[3]!=0)
 			break;
 	}
+	KeyPad_CallBack(Local_U8_ArrUser[3]);
+	while(1)
+	{
+		Local_U8_ArrUser[4]=H_KeyPad_U8_KeyPadRead();
+		if(Local_U8_ArrUser[4]!=0)
+			break;
+	}
+	KeyPad_CallBack(Local_U8_ArrUser[4]);
+	while(1)
+	{
+		Local_U8_ArrUser[5]=H_KeyPad_U8_KeyPadRead();
+		if(Local_U8_ArrUser[5]!=0)
+			break;
+	}
+	KeyPad_CallBack(Local_U8_ArrUser[5]);
 	return Local_U8_ArrUser;
 }
 
-
-
-
-
-
-
-
-
+void H_KeyPad_Void_SetCallBack(u8(*Copy_Ptr)(u8*))
+{
+	KeyPad_CallBack=Copy_Ptr;
+}
 

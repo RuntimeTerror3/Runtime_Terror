@@ -19,5 +19,6 @@
 void H_KeyPad_Void_KeyPadInit(void);
 u8   H_KeyPad_U8_KeyPadRead(void);
 u8   *H_KeyPad_U8_KeyPadGetUser(u8);
+void H_KeyPad_Void_SetCallBack(u8(*)(u8*));
 
 #endif /* HAL_KEYPAD_KEYPAD_INTERFACE_H_ */
