@@ -45,6 +45,23 @@ u8 Global_U8_ACState = INITIAL_VALUE;
 /*************************************************-MAIN_FUNCTION-**************************************************/
 int main()
 {
+	/*Run the following code only on the first run of the program. Feel free to change the Local_U8_Admin_User and Local_U8_Admin_Pass. They are the admin
+	 * Credentials that will be used in the program. Please input only four characters in each field.*/
+#if RIRST_RUN == NO
+	u8 Local_U8_Counter=INITIAL_VALUE;
+	u8 Local_U8_Admin_User[4]={'M','i','n','a'};
+	u8 Local_U8_Admin_Pass[4]={'1','2','3','4'};
+	for(Local_U8_Counter=INITIAL_VALUE;Local_U8_Counter<=3;Local_U8_Counter++)
+	{
+		H_AT24C16A_Void_EEPROMWrite(0,Local_U8_Counter,Local_U8_Admin_User[Local_U8_Counter]);
+		_delay_ms(1000);
+	}
+	for(Local_U8_Counter=4;Local_U8_Counter<=7;Local_U8_Counter++)
+	{
+			H_AT24C16A_Void_EEPROMWrite(0,Local_U8_Counter,Local_U8_Admin_Pass[Local_U8_Counter-4]);
+			_delay_ms(1000);
+	}
+#endif
 /*************************************************-DRIVERS_INITILIZATION-******************************************/
 	H_AT24C16A_Void_EEPROMInit();
 	M_GIE_Void_GlobalInterruptEnable();

@@ -70,6 +70,9 @@
 #define UART_STRING_SIZE5       28
 #define UART_STRING_SIZE6       24
 
+#define RIRST_RUN 1
+#define YES       1
+#define NO        0
 
 
 

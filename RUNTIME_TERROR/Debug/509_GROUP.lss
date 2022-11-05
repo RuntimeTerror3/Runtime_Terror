@@ -11,25 +11,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
   3 .stab         00006f18  00000000  00000000  00003cf0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      0000240e  00000000  00000000  0000ac08  2**0
+  4 .stabstr      00002428  00000000  00000000  0000ac08  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_aranges 000001a0  00000000  00000000  0000d016  2**0
+  5 .debug_aranges 000001a0  00000000  00000000  0000d030  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_pubnames 000001f6  00000000  00000000  0000d1b6  2**0
+  6 .debug_pubnames 000001f6  00000000  00000000  0000d1d0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_info   00002393  00000000  00000000  0000d3ac  2**0
+  7 .debug_info   00002393  00000000  00000000  0000d3c6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00001374  00000000  00000000  0000f73f  2**0
+  8 .debug_abbrev 00001374  00000000  00000000  0000f759  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   00001238  00000000  00000000  00010ab3  2**0
+  9 .debug_line   00001238  00000000  00000000  00010acd  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_frame  000001c0  00000000  00000000  00011cec  2**2
+ 10 .debug_frame  000001c0  00000000  00000000  00011d08  2**2
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    000002ff  00000000  00000000  00011eac  2**0
+ 11 .debug_str    000002ff  00000000  00000000  00011ec8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_loc    000009de  00000000  00000000  000121ab  2**0
+ 12 .debug_loc    000009de  00000000  00000000  000121c7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 00000050  00000000  00000000  00012b89  2**0
+ 13 .debug_ranges 00000050  00000000  00000000  00012ba5  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -9154,6 +9154,10 @@ int main()
     35a8:	ff 92       	push	r15
     35aa:	0f 93       	push	r16
     35ac:	1f 93       	push	r17
+			H_AT24C16A_Void_EEPROMWrite(0,Local_U8_Counter,Local_U8_Admin_Pass[Local_U8_Counter-4]);
+			_delay_ms(1000);
+	}
+#endif
 /*************************************************-DRIVERS_INITILIZATION-******************************************/
 	H_AT24C16A_Void_EEPROMInit();
     35ae:	0e 94 eb 16 	call	0x2dd6	; 0x2dd6 <H_AT24C16A_Void_EEPROMInit>
